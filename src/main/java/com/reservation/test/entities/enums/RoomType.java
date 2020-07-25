@@ -1,4 +1,4 @@
-package com.reservation.test.enums;
+package com.reservation.test.entities.enums;
 
 public enum RoomType {
     THERAPY_ROOM,

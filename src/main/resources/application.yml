@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test_db?useMysqlMetadata=true
+    username: reservation
+    password: 12345
