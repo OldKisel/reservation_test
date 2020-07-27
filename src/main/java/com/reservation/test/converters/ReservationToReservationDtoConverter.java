@@ -3,7 +3,9 @@ package com.reservation.test.converters;
 import com.reservation.test.dto.ReservationDto;
 import com.reservation.test.entities.Reservation;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ReservationToReservationDtoConverter implements Converter<Reservation, ReservationDto> {
     @Override
     public ReservationDto convert(Reservation source) {

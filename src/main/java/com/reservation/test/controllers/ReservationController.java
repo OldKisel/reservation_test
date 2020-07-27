@@ -39,7 +39,7 @@ public class ReservationController {
 
     @GetMapping
     public List<ReservationDto> get() {
-        return reservationService.get().stream().map(reservation ->
+        return reservationService.getAll().stream().map(reservation ->
                 conversionService.convert(reservation, ReservationDto.class)).collect(Collectors.toList());
     }
 

@@ -10,7 +10,7 @@ CREATE TABLE `person`
 
 CREATE TABLE `room`
 (
-    `id`     INT NOT NULL,
+    `id`     INT NOT NULL AUTO_INCREMENT,
     `number` INT NOT NULL,
     `type`   ENUM ('THERAPY_ROOM', 'TRAINING_ROOM', 'OPERATING_ROOM', 'LABORATORY'),
     CONSTRAINT pk_room PRIMARY KEY (`id`)
@@ -29,7 +29,7 @@ CREATE TABLE `reservation`
     `end_date`    TIMESTAMP    NOT NULL DEFAULT UTC_TIMESTAMP,
 
     CONSTRAINT pk_reservation PRIMARY KEY (`id`),
-    CONSTRAINT fk_reservation_room_id_room_id FOREIGN KEY (`room_id`) REFERENCES `room` (id),
+    CONSTRAINT fk_reservation_room_id_room_id FOREIGN KEY (`room_id`) REFERENCES `room` (id) ON DELETE CASCADE,
     CONSTRAINT fk_reservation_person_id_person_id FOREIGN KEY (`person_id`) REFERENCES `person` (id),
     INDEX ix_reservation_room_id (room_id),
     INDEX ix_reservation_person_id (person_id),
