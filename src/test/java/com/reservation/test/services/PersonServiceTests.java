@@ -23,11 +23,13 @@ public class PersonServiceTests {
         personService = new PersonService(personRepository);
     }
 
+    Person newPerson = new Person(null, "Ivan", Position.THERAPIST);
+    Person createdPerson = new Person(1, "Ivan", Position.THERAPIST);
+    Person updatedPerson = new Person(1, "Egor", Position.THERAPIST);
+
+
     @Test
     public void createTestDone() {
-        Person newPerson = new Person(null, "Ivan", Position.THERAPIST);
-        Person createdPerson = new Person(1, "Ivan", Position.THERAPIST);
-
         Mockito.when(personRepository.findByName("Ivan")).thenReturn(Optional.empty());
 
         personService.create(newPerson);
@@ -36,8 +38,6 @@ public class PersonServiceTests {
 
     @Test
     public void createTestWithException() {
-        Person newPerson = new Person(null, "Ivan", Position.THERAPIST);
-        Person createdPerson = new Person(1, "Ivan", Position.THERAPIST);
 
         Mockito.when(personRepository.findByName("Ivan")).thenReturn(Optional.of(createdPerson));
 
@@ -47,7 +47,6 @@ public class PersonServiceTests {
     @Test
     public void updateTest() {
         Person createdPerson = new Person(1, "Ivan", Position.THERAPIST);
-        Person updatedPerson = new Person(1, "Egor", Position.THERAPIST);
 
         Mockito.when(personRepository.findById(1)).thenReturn(Optional.of(createdPerson));
         Mockito.when(personRepository.save(updatedPerson)).thenReturn(updatedPerson);
@@ -59,8 +58,6 @@ public class PersonServiceTests {
 
     @Test
     public void updateTestWithException() {
-        Person updatedPerson = new Person(1, "Egor", Position.THERAPIST);
-
         Mockito.when(personRepository.findById(1)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(NotFoundException.class, () -> personService.update(updatedPerson));
@@ -79,8 +76,6 @@ public class PersonServiceTests {
 
     @Test
     public void deleteTest() {
-        Person createdPerson = new Person(1, "Ivan", Position.THERAPIST);
-
         Mockito.when(personRepository.findById(1)).thenReturn(Optional.of(createdPerson));
 
         personService.removeById(1);
@@ -90,7 +85,6 @@ public class PersonServiceTests {
 
     @Test
     public void deleteTestWithException() {
-
         Mockito.when(personRepository.findById(1)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(NotFoundException.class, () -> personService.removeById(1));
@@ -98,8 +92,6 @@ public class PersonServiceTests {
 
     @Test
     public void checkTest() {
-        Person createdPerson = new Person(1, "Ivan", Position.THERAPIST);
-
         Mockito.when(personRepository.findById(1)).thenReturn(Optional.of(createdPerson));
 
         personService.checkExistsById(1);

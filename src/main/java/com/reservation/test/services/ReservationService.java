@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 import java.time.Instant;
 import java.util.List;
 
@@ -37,13 +37,13 @@ public class ReservationService {
         personService.checkExistsById(personId);
 
         if (reservationRepository.
-                existsReservationByRoomIdAndDate(roomId, start, end)) {
-            throw new BadRequestException(String.format(
+                existsByRoomIdAndDate(roomId, start, end)) {
+            throw new NotFoundException(String.format(
                     "Room with id %s is already reserved on this time", roomId));
         }
         if (reservationRepository.
-                existsReservationByPersonIdAndDate(personId, start, end)) {
-            throw new BadRequestException(String.format(
+                existsByPersonIdAndDate(personId, start, end)) {
+            throw new NotFoundException(String.format(
                     "Person with id %s is already reserved room on this time", personId));
         }
         reservationRepository.save(res);
@@ -80,7 +80,7 @@ public class ReservationService {
 
     private void checkExistsById(Integer id) {
         if (reservationRepository.findById(id).isEmpty()) {
-            throw new BadRequestException(String.format("Reservation with id %s is not found", id));
+            throw new NotFoundException(String.format("Reservation with id %s is not found", id));
         }
     }
 }

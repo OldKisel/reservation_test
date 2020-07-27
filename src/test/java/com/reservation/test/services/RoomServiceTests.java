@@ -24,11 +24,11 @@ public class RoomServiceTests {
         roomService = new RoomService(roomRepository);
     }
 
+    Room newRoom = new Room(null, 101, RoomType.LABORATORY);
+    Room createdRoom = new Room(1, 101, RoomType.LABORATORY);
+
     @Test
     public void createTestDone() {
-        Room newRoom = new Room(null, 101, RoomType.LABORATORY);
-        Room createdRoom = new Room(1, 101, RoomType.LABORATORY);
-
         Mockito.when(roomRepository.findByNumber(101)).thenReturn(Optional.empty());
 
         roomService.create(newRoom);

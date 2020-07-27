@@ -17,7 +17,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
             "AND r.startDate > ?2 AND r.startDate < ?3 " +
             "OR r.endDate > ?2 AND r.endDate < ?3 " +
             "OR r.startDate < ?2 AND r.endDate > ?3")
-    boolean existsReservationByRoomIdAndDate
+    boolean existsByRoomIdAndDate
             (Integer roomId, Instant startDate, Instant endDate);
 
     @Query(value = "SELECT CASE WHEN count(r) > 0 THEN TRUE ELSE FALSE END   " +
@@ -26,7 +26,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
             "AND r.startDate > ?2 AND r.startDate < ?3 " +
             "OR r.endDate > ?2 AND r.endDate < ?3 " +
             "OR r.startDate < ?2 AND r.endDate > ?3")
-    boolean existsReservationByPersonIdAndDate
+    boolean existsByPersonIdAndDate
             (Integer personId, Instant startDate, Instant endDate);
 
     @Query(value = "SELECT r FROM Reservation r WHERE r.startDate < ?1 AND r.endDate > ?1")
